@@ -27,7 +27,8 @@
     select:focus, input[type="text"]:focus { outline: 2px solid #003885; border-color: transparent; }
     .btn { padding: 6px 14px; border: none; border-radius: 4px; font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 600; cursor: pointer; }
     .btn-clear { background: #f0f0f0; color: #555; border: 1px solid #ddd; } .btn-clear:hover { background: #e0e0e0; }
-    .btn-edit { background: #003885; color: white; margin-left: auto; } .btn-edit:hover { background: #002a6a; } .btn-edit.active { background: #c0392b; } .btn-edit.active:hover { background: #a93226; }
+    .btn-edit { background: #003885; color: white; margin-left: auto; } .btn-edit:hover { background: #002a6a; }
+    .btn-edit.active { background: #c0392b; } .btn-edit.active:hover { background: #a93226; }
     .btn-copy { background: #009900; color: white; display: none; } .btn-copy:hover { background: #007700; }
     .edit-hint { display: none; padding: 9px 32px; background: #fffbe6; border-bottom: 1px solid #ffe58f; font-size: 12px; color: #7a5c00; }
     .edit-hint.visible { display: block; }
@@ -37,7 +38,8 @@
     table { width: 100%; border-collapse: collapse; background: white; border-radius: 6px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,56,133,0.08); }
     thead tr { background: #003885; }
     th { text-align: left; padding: 10px 14px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px; color: rgba(255,255,255,0.85); white-space: nowrap; cursor: pointer; user-select: none; }
-    th:hover { color: white; } th.sorted-asc::after { content: " ↑"; color: #009900; } th.sorted-desc::after { content: " ↓"; color: #009900; }
+    th:hover { color: white; }
+    th.sorted-asc::after { content: " ↑"; color: #009900; } th.sorted-desc::after { content: " ↓"; color: #009900; }
     tbody tr { border-bottom: 1px solid #f0f3f8; transition: background 0.1s; }
     tbody tr:hover { background: #f0f5ff; } tbody tr.hidden { display: none; }
     td { padding: 10px 14px; vertical-align: top; line-height: 1.4; } .task-text { max-width: 380px; }
@@ -49,7 +51,8 @@
     .owner-chip { display: inline-block; padding: 2px 9px; border-radius: 12px; font-size: 11px; font-weight: 600; background: #e8eef8; color: #003885; border: 1px solid #c5d8f0; white-space: nowrap; }
     .owner-chip.ext { background: #f0f8f0; color: #007700; border-color: #b8e0b8; }
     .proj-tag { font-size: 11px; color: #555; background: #f0f3f8; padding: 2px 7px; border-radius: 4px; white-space: nowrap; }
-    .due-overdue { color: #c0392b; font-weight: 700; } .due-today { color: #003885; font-weight: 700; } .due-week { color: #009900; font-weight: 600; } .due-later { color: #888; }
+    .due-overdue { color: #c0392b; font-weight: 700; } .due-today { color: #003885; font-weight: 700; }
+    .due-week { color: #009900; font-weight: 600; } .due-later { color: #888; }
     .cb-col { width: 36px; text-align: center; } th.cb-col, td.cb-col { display: none; }
     body.edit-mode th.cb-col, body.edit-mode td.cb-col { display: table-cell; }
     body.edit-mode tbody tr:not(.hidden) { cursor: pointer; } body.edit-mode tbody tr:not(.hidden):hover { background: #e8f0ff; }
@@ -63,17 +66,22 @@
   </style>
 </head>
 <body>
+
 <header>
   <div class="header-left">
     <h1>AHC Task Dashboard</h1>
     <span class="header-tagline">Solutions in Livestock Nutrition</span>
   </div>
-  <div class="header-right">Updated: 03 April 2026</div>
+  <div class="header-right">
+    Updated: 03 April 2026
+  </div>
 </header>
+
 <div class="meta-bar">
   <div><strong>Purpose:</strong> Full task visibility for the AHC team — input and ideas welcome</div>
   <div><strong>Note:</strong> Individual task creation dates are not tracked per task. Shown as approximate capture date.</div>
 </div>
+
 <div class="stats">
   <div class="stat-card"><div class="num num-crit" id="s-critical">—</div><div class="lbl">Critical</div></div>
   <div class="stat-card"><div class="num num-high" id="s-high">—</div><div class="lbl">High</div></div>
@@ -81,9 +89,16 @@
   <div class="stat-card"><div class="num num-low" id="s-low">—</div><div class="lbl">Low / Waiting</div></div>
   <div class="stat-card total"><div class="num num-total" id="s-total">—</div><div class="lbl">Total Open</div></div>
 </div>
+
 <div class="controls">
   <label>Priority</label>
-  <select id="f-priority"><option value="">All</option><option value="Critical">🔴 Critical</option><option value="High">🔵 High</option><option value="Medium">🟢 Medium</option><option value="Low">⚪ Low / Waiting</option></select>
+  <select id="f-priority">
+    <option value="">All</option>
+    <option value="Critical">🔴 Critical</option>
+    <option value="High">🔵 High</option>
+    <option value="Medium">🟢 Medium</option>
+    <option value="Low">⚪ Low / Waiting</option>
+  </select>
   <label>Project</label>
   <select id="f-project"><option value="">All</option></select>
   <label>Owner</label>
@@ -94,66 +109,75 @@
   <button class="btn btn-edit" id="btn-edit" onclick="toggleEditMode()">✏️ Edit mode</button>
   <button class="btn btn-copy" id="btn-copy" onclick="copyCompletedList()">📋 Copy list for Claude</button>
 </div>
-<div class="edit-hint" id="edit-hint">✅ <strong>Edit mode active</strong> — Click tasks to mark as done. When finished, press <strong>"Copy list for Claude"</strong> and paste in the chat.</div>
+
+<div class="edit-hint" id="edit-hint">
+  ✅ <strong>Edit mode active</strong> — Click tasks to mark as done. When finished, press <strong>"Copy list for Claude"</strong> and paste in the chat.
+</div>
+
 <div id="count-bar">Showing <span id="visible-count">—</span> tasks</div>
+
 <div class="table-wrap">
   <table id="task-table">
-    <thead><tr>
-      <th class="cb-col"></th>
-      <th onclick="sortTable(0)">Priority</th>
-      <th onclick="sortTable(1)">Task</th>
-      <th onclick="sortTable(2)">Project</th>
-      <th onclick="sortTable(3)">Owner</th>
-      <th onclick="sortTable(4)">Due Date</th>
-      <th onclick="sortTable(5)">Captured</th>
-    </tr></thead>
+    <thead>
+      <tr>
+        <th class="cb-col"></th>
+        <th onclick="sortTable(0)">Priority</th>
+        <th onclick="sortTable(1)">Task</th>
+        <th onclick="sortTable(2)">Project</th>
+        <th onclick="sortTable(3)">Owner</th>
+        <th onclick="sortTable(4)">Due Date</th>
+        <th onclick="sortTable(5)">Captured</th>
+      </tr>
+    </thead>
     <tbody id="task-body"></tbody>
   </table>
 </div>
+
 <div class="legend">
   <strong>Priority:</strong>
   <div class="legend-item"><span class="badge p-critical">Critical</span> Overdue or due today</div>
   <div class="legend-item"><span class="badge p-high">High</span> Due this week / ASAP</div>
-  <div class="legend-item"><span class="badge p-medium">Medium</span> Due in April</div>
+  <div class="legend-item"><span class="badge p-medium">Medium</span> Due in April 2026</div>
   <div class="legend-item"><span class="badge p-low">Low / Waiting</span> Later or blocked on others</div>
 </div>
+
 <div id="toast">✅ List copied to clipboard</div>
+
 <script>
 const tasks = [
-{ priority:"High", task:"Seguimiento con Martijn y Ruud: NIE applications — firmar PoA ante notario holandés, escanear y enviar a Wigbolt (bloqueante del proceso)", project:"AHC Spain SL Setup", owner:"Eric", due:"ASAP (blocker)", dueSort:2, captured:"03 Apr 2026" },
+{ priority:"High", task:"Revisar datos del trial de Cryptosporidium en terneros", project:"Poster Anembe 2026", owner:"Eric", due:"This week", dueSort:2, captured:"03 Apr 2026" },
 { priority:"High", task:"Confirmar fecha límite de envío de pósters a Anembe", project:"Poster Anembe 2026", owner:"Eric", due:"ASAP", dueSort:2, captured:"03 Apr 2026" },
-{ priority:"High", task:"Procesar feedback de René (27/03) y briefar a Max Camunas con la dirección estratégica", project:"Website AHC", owner:"Eric", due:"ASAP", dueSort:2, captured:"03 Apr 2026" },
-{ priority:"High", task:"Reunión COVAP en Córdoba con Rafi/Serafín en la granja", project:"COVAP Results Presentation", owner:"Encarna / Amalia", due:"7 Apr 2026", dueSort:3, captured:"03 Apr 2026" },
-{ priority:"High", task:"Revisar datos del trial de Cryptosporidium en terneros", project:"Poster Anembe 2026", owner:"Eric", due:"This week", dueSort:3, captured:"03 Apr 2026" },
-{ priority:"High", task:"Enviar notas/ideas por slide del póster a Encarna", project:"Poster Anembe 2026", owner:"Eric", due:"This week", dueSort:3, captured:"03 Apr 2026" },
+{ priority:"High", task:"Eric: enviar notas/ideas por slide del póster a Encarna", project:"Poster Anembe 2026", owner:"Eric", due:"This week", dueSort:2, captured:"03 Apr 2026" },
+{ priority:"High", task:"Procesar feedback de René (27/03) y briefar a Max Camunas con dirección estratégica", project:"Website AHC", owner:"Eric", due:"ASAP", dueSort:2, captured:"03 Apr 2026" },
+{ priority:"High", task:"Encarna + Amalia: reunión COVAP en Córdoba con Rafi/Serafín en la granja", project:"COVAP Results Presentation", owner:"Encarna / Amalia", due:"7 Apr 2026", dueSort:3, captured:"03 Apr 2026" },
 { priority:"Medium", task:"Seguimiento con Luis sobre Cipor y pipeline", project:"BRM Peru 2026", owner:"Eric", due:"April 2026", dueSort:4, captured:"03 Apr 2026" },
+{ priority:"Medium", task:"Trackear contrato actualización exit bonus Eric+René — follow-up si Martijn no lo inicia", project:"Director Comercial - Proceso Completo", owner:"Eric", due:"~15 Apr 2026", dueSort:4, captured:"03 Apr 2026" },
 { priority:"Medium", task:"Confirmar lista de asistentes AHC al ESPHM", project:"ESPHM 2026 Congress", owner:"Eric", due:"April 2026", dueSort:4, captured:"03 Apr 2026" },
 { priority:"Medium", task:"Evaluar si AHC presenta póster o comunicación en ESPHM", project:"ESPHM 2026 Congress", owner:"Eric", due:"April 2026", dueSort:4, captured:"03 Apr 2026" },
 { priority:"Medium", task:"Terminar la presentación corporativa de AHC", project:"Other", owner:"Eric", due:"April 2026", dueSort:4, captured:"03 Apr 2026" },
-{ priority:"Medium", task:"Diseñar póster 80x120 — muy visual, prueba de campo, nivel Eric", project:"Poster Anembe 2026", owner:"Eric", due:"April 2026", dueSort:4, captured:"03 Apr 2026" },
-{ priority:"Medium", task:"Definir estructura de contenido por producto/mercado en Showpad", project:"Showpad Implementation", owner:"Eric", due:"April 2026", dueSort:4, captured:"03 Apr 2026" },
+{ priority:"Medium", task:"Eric: diseñar póster 80x120 — muy visual, prueba de campo, nivel Eric", project:"Poster Anembe 2026", owner:"Eric", due:"April 2026", dueSort:4, captured:"03 Apr 2026" },
+{ priority:"Medium", task:"Definir estructura de contenido por producto/mercado", project:"Showpad Implementation", owner:"Eric", due:"April 2026", dueSort:4, captured:"03 Apr 2026" },
 { priority:"Medium", task:"Revisar si hay más páginas que necesiten actualización", project:"Website AHC", owner:"Eric", due:"April 2026", dueSort:4, captured:"03 Apr 2026" },
 { priority:"Medium", task:"Coordinar contenido multiidioma con WPML", project:"Website AHC", owner:"Eric", due:"April 2026", dueSort:4, captured:"03 Apr 2026" },
-{ priority:"Low", task:"Enviar a Amalia explicación sobre AHC Spain SL: liquidación y operativa futura", project:"AHC Spain SL Setup", owner:"Eric", due:"After Easter", dueSort:5, captured:"03 Apr 2026" },
-{ priority:"Low", task:"Pendiente de WeWork: confirmar fechas disponibles para notaría (después de NIEs)", project:"AHC Spain SL Setup", owner:"Eric", due:"Pending NIEs first", dueSort:6, captured:"03 Apr 2026" },
-{ priority:"Low", task:"Coordinar visita Madrid con Amalia y Encarna para combinar firma notaría + visitas clientes", project:"AHC Spain SL Setup", owner:"Eric", due:"Before signing", dueSort:6, captured:"03 Apr 2026" },
-{ priority:"Low", task:"Enviar a Amalia cómo se le va a pagar el bonus este año", project:"Compensation & Bonus", owner:"Eric", due:"After Easter", dueSort:5, captured:"03 Apr 2026" },
+{ priority:"Low", task:"Enviar a Amalia explicación sobre AHCSL: liquidación de la empresa y operativa futura", project:"AHC Spain SL Setup", owner:"Eric", due:"After Easter", dueSort:5, captured:"03 Apr 2026" },
+{ priority:"Low", task:"Enviar a Amalia cómo se le va a pagar el bonus este año", project:"Compensation & Bonus - Historia Completa", owner:"Eric", due:"After Easter", dueSort:5, captured:"03 Apr 2026" },
 { priority:"Low", task:"Eric + René: diseñar estructura Dysentery Program completo (in vitro + TiHo + Uni León)", project:"Dysentery Program", owner:"Eric / René", due:"After delivering both presentations", dueSort:5, captured:"03 Apr 2026" },
 { priority:"Low", task:"Revisar pipeline España con Amalia (datos cruzados con PBI disponibles en Teams)", project:"Other", owner:"Eric", due:"After Easter", dueSort:5, captured:"03 Apr 2026" },
-{ priority:"Low", task:"Diseñar póster 80x120 — muy visual, prueba de campo, nivel Eric — diseño final", project:"Poster Anembe 2026", owner:"Eric", due:"April 2026", dueSort:4, captured:"03 Apr 2026" },
 { priority:"Low", task:"Mattheus: revisión técnica del póster y decisión de dirección", project:"Poster Anembe 2026", owner:"Mattheus", due:"After fact-finding", dueSort:5, captured:"03 Apr 2026" },
-{ priority:"Low", task:"Proponer guidelines para publicaciones externas AHC en próximo MT meeting", project:"Poster Anembe 2026", owner:"Eric", due:"Next MT meeting", dueSort:6, captured:"03 Apr 2026" },
-{ priority:"Low", task:"Pendiente de Joan Totusaus: compartir presentación ecografías pulmonares para review AHC", project:"Poster Anembe 2026", owner:"Joan Totusaus", due:"Before Anembe (20-22 May)", dueSort:6, captured:"03 Apr 2026" },
-{ priority:"Low", task:"René: organizar Teams meeting interno para presentar León y TiHo a países", project:"Presentacion Uni Leon Trial", owner:"René", due:"After Eric delivers", dueSort:5, captured:"03 Apr 2026" },
-{ priority:"Low", task:"Gráfico fecal score vs. ADG — pendiente de Héctor (PhD student Uni León)", project:"Presentacion Uni Leon Trial", owner:"Héctor (Uni León)", due:"Pending Héctor", dueSort:6, captured:"03 Apr 2026" },
-{ priority:"Low", task:"Continuar subida de materiales actualizados en Showpad", project:"Showpad Implementation", owner:"Eric", due:"Ongoing", dueSort:5, captured:"03 Apr 2026" },
-{ priority:"Low", task:"Competitive analysis Pig & Poultry — 5 competidores Southern Africa", project:"Southern Africa Market", owner:"Eric", due:"After Easter", dueSort:5, captured:"03 Apr 2026" },
+{ priority:"Low", task:"Continuar subida de materiales actualizados", project:"Showpad Implementation", owner:"Eric", due:"Ongoing", dueSort:5, captured:"03 Apr 2026" },
+{ priority:"Low", task:"Armonizar portfolio corporativo: shrimp + DigeMax Ecuador + Nano + Corporate (estilos inconsistentes)", project:"Showpad Implementation", owner:"Eric", due:"After Easter", dueSort:5, captured:"03 Apr 2026" },
+{ priority:"Low", task:"Eric: competitive analysis Pig & Poultry — EW Nutrition, Delacon, Trouw Nutrition, Phytobiotics, Kemin + evaluar Pancosma/Nor-Feed/Adisseo", project:"Southern Africa Market", owner:"Eric", due:"After Easter", dueSort:5, captured:"03 Apr 2026" },
 { priority:"Low", task:"Responder a Ross sobre preguntas Westside/Selko/Brett Roosendaal (coordinar con Ruud/Martijn)", project:"Southern Africa Market", owner:"Eric", due:"After Easter", dueSort:5, captured:"03 Apr 2026" },
-{ priority:"Low", task:"Ayudar con la presentación Taiwan Seminar cuando llegue el momento", project:"Taiwan Seminar 2026", owner:"Eric", due:"Pending date confirmation", dueSort:6, captured:"03 Apr 2026" },
-{ priority:"Low", task:"Calendar invite con agenda teaser para Global Call Q2", project:"Global Call Q2 2026", owner:"Eric", due:"~4 May 2026", dueSort:6, captured:"03 Apr 2026" },
-{ priority:"Low", task:"Reminder personal a André Schrijver y Henk Jan Kwant — Global Call", project:"Global Call Q2 2026", owner:"Eric", due:"~10 Jun 2026", dueSort:6, captured:"03 Apr 2026" },
-{ priority:"Low", task:"Preparar survey para no-asistentes al Global Call", project:"Global Call Q2 2026", owner:"Eric", due:"Post-call", dueSort:6, captured:"03 Apr 2026" },
-{ priority:"Low", task:"Seguir protocolo terneros Perú: DigeStart FA + Eucalypsol + Digemax EE (granjas LACTEA y MOCHERITA)", project:"BRM Peru 2026", owner:"Mattheus", due:"Pending Mattheus", dueSort:6, captured:"03 Apr 2026" },
+{ priority:"Low", task:"Coordinar visita Madrid con Amalia y Encarna: firma notaría + visitas clientes", project:"AHC Spain SL Setup", owner:"Eric", due:"Before signing", dueSort:6, captured:"03 Apr 2026" },
+{ priority:"Low", task:"Seguir protocolo terneros Perú: DigeStart FA + Eucalypsol + Digemax EE para granjas lecheras (LACTEA y MOCHERITA)", project:"BRM Peru 2026", owner:"Mattheus", due:"Pending Mattheus", dueSort:6, captured:"03 Apr 2026" },
+{ priority:"Low", task:"Calendar invite con agenda teaser (6 semanas antes del 15 junio)", project:"Global Call - Contexto Completo", owner:"Eric", due:"~4 May 2026", dueSort:6, captured:"03 Apr 2026" },
+{ priority:"Low", task:"Reminder personal a André Schrijver y Henk Jan Kwant", project:"Global Call - Contexto Completo", owner:"Eric", due:"~10 Jun 2026", dueSort:6, captured:"03 Apr 2026" },
+{ priority:"Low", task:"Preparar survey para no-asistentes al Global Call", project:"Global Call - Contexto Completo", owner:"Eric", due:"Post-call", dueSort:6, captured:"03 Apr 2026" },
+{ priority:"Low", task:"Esperar contacto de Mitra (India) para leaflets mercado indio", project:"Other", owner:"Eric", due:"Pending Mitra", dueSort:6, captured:"03 Apr 2026" },
+{ priority:"Low", task:"Pendiente de Joan Totusaus: compartir presentación ecografías pulmonares para review AHC", project:"Poster Anembe 2026", owner:"Joan Totusaus", due:"Before Anembe (20-22 May)", dueSort:6, captured:"03 Apr 2026" },
+{ priority:"Low", task:"MT meeting: proponer guidelines para publicaciones externas AHC", project:"Poster Anembe 2026", owner:"Eric", due:"Next MT meeting", dueSort:6, captured:"03 Apr 2026" },
+{ priority:"Low", task:"Gráfico fecal score vs. ADG — SKIP por ahora (esperando respuesta de Héctor, Uni León)", project:"Presentacion Uni Leon Trial", owner:"Héctor (Uni León)", due:"Pending Héctor", dueSort:6, captured:"03 Apr 2026" },
+{ priority:"Low", task:"Eric: ayudar con la presentación Taiwan cuando llegue el momento", project:"Taiwan Seminar 2026", owner:"Eric", due:"Pending date confirmation", dueSort:6, captured:"03 Apr 2026" },
 ];
 
 const projects = [...new Set(tasks.map(t => t.project))].sort();
@@ -170,7 +194,7 @@ function priorityBadge(p) {
 function dueClass(d) {
   if (d.includes("OVERDUE")) return "due-overdue";
   if (d.includes("Today"))   return "due-today";
-  if (d.includes("ASAP") || d.includes("Apr") || d.includes("week")) return "due-week";
+  if (d.includes("ASAP") || d.includes("Apr") || d.includes("This week")) return "due-week";
   return "due-later";
 }
 function ownerChip(o) {
@@ -187,7 +211,9 @@ tasks.forEach(t => {
   tr.dataset.search   = (t.task+" "+t.project+" "+t.owner).toLowerCase();
   tr.dataset.duesort  = t.dueSort;
   tr.innerHTML = `
-    <td class="cb-col"><input type="checkbox" class="task-cb" onclick="event.stopPropagation()" onchange="this.closest('tr').classList.toggle('done-row',this.checked);updateCopyBtn()"></td>
+    <td class="cb-col"><input type="checkbox" class="task-cb"
+      onclick="event.stopPropagation()"
+      onchange="this.closest('tr').classList.toggle('done-row',this.checked);updateCopyBtn()"></td>
     <td>${priorityBadge(t.priority)}</td>
     <td class="task-text">${t.task}</td>
     <td><span class="proj-tag">${t.project}</span></td>
