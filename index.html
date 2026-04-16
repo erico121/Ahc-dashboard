@@ -13,7 +13,6 @@
     .header-left h1 { font-size: 20px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
     .header-tagline { font-size: 11px; color: #009900; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
     .header-right { text-align: right; font-size: 12px; opacity: 0.75; }
-    .header-right strong { opacity: 1; display: block; font-size: 13px; }
     .meta-bar { background: #e8f0f8; border-bottom: 1px solid #c5d8f0; padding: 8px 32px; font-size: 11px; color: #003885; display: flex; gap: 24px; flex-wrap: wrap; }
     .stats { padding: 16px 32px; display: flex; gap: 12px; flex-wrap: wrap; }
     .stat-card { background: white; border: 1px solid #e0e4ea; border-top: 3px solid #003885; border-radius: 6px; padding: 12px 20px; min-width: 100px; text-align: center; }
@@ -75,7 +74,7 @@
 </header>
 <div class="meta-bar">
   <div><strong>Purpose:</strong> Full task visibility for the AHC team — input and ideas welcome</div>
-  <div><strong>Note:</strong> Individual task creation dates are not tracked per task. Shown as approximate capture date.</div>
+  <div><strong>Note:</strong> Capture date shown is approximate.</div>
 </div>
 <div class="stats">
   <div class="stat-card"><div class="num num-crit" id="s-critical">—</div><div class="lbl">Critical</div></div>
@@ -120,53 +119,32 @@
 <div id="toast">List copied to clipboard</div>
 <script>
 const tasks = [
-{ priority:"Critical", task:"Preparar input More/Less para MT meeting 14 abril (PMCs, países, especies, actividades)", project:"260407-Session-AHC-Johan-Strategy", owner:"Eric", due:"OVERDUE (~14 Apr)", dueSort:0, captured:"16 Apr 2026" },
-{ priority:"Critical", task:"Ruud: Team meeting — decisiones PMC (species/countries/segments) — Kill our babies", project:"260407-Session-AHC-Johan-Strategy", owner:"Ruud", due:"OVERDUE (~14 Apr)", dueSort:0, captured:"16 Apr 2026" },
-{ priority:"High", task:"Mapear calendario de conferencias / presencia externa 2026 (input Martijn: visibilidad para exit value)", project:"30-ERM/Marca-Personal", owner:"Eric", due:"This week (Fri 18 Apr)", dueSort:2, captured:"16 Apr 2026" },
 { priority:"High", task:"CRITICO — Preparar CD Onboarding Briefing para Bernd Spelbos — documento por area (species x market): situacion actual / wins / blockers / quick wins / relaciones clave / tareas priorizadas", project:"CD Onboarding Briefing - Bernd Spelbos", owner:"Eric", due:"Before 1 Jun (draft overdue)", dueSort:2, captured:"16 Apr 2026" },
-{ priority:"High", task:"Escalar a Ruud + René la pregunta de cadena de mando rumiantes (quien aprueba trials / dosis / presentaciones)", project:"COVAP Results Presentation", owner:"Eric", due:"This week (Fri 18 Apr)", dueSort:2, captured:"16 Apr 2026" },
-{ priority:"High", task:"Diseñar framework Pre-Visit Prep + Competitor Snapshot (base reutilizable para equipo comercial)", project:"Director Comercial - Proceso Completo", owner:"Eric", due:"This week (Fri 18 Apr)", dueSort:2, captured:"16 Apr 2026" },
+{ priority:"High", task:"Disenar framework Pre-Visit Prep + Competitor Snapshot (base reutilizable para equipo comercial)", project:"Director Comercial - Proceso Completo", owner:"Eric", due:"This week (Fri 18 Apr)", dueSort:2, captured:"16 Apr 2026" },
 { priority:"High", task:"Documentar 4-stage funnel acordado e integrarlo al sales playbook AHC", project:"Director Comercial - Proceso Completo", owner:"Eric", due:"This week (Fri 18 Apr)", dueSort:2, captured:"16 Apr 2026" },
 { priority:"High", task:"Definir plantilla de weekly report para equipo comercial (disciplina no-negociable acordada en MT)", project:"Director Comercial - Proceso Completo", owner:"Eric", due:"This week (Fri 18 Apr)", dueSort:2, captured:"16 Apr 2026" },
-{ priority:"High", task:"Pendiente de Martijn: follow-up con Eric Steins (candidato US/rumiantes)", project:"260407-Session-AHC-Johan-Strategy", owner:"Martijn", due:"This week (Fri 18 Apr)", dueSort:2, captured:"16 Apr 2026" },
+{ priority:"High", task:"Mapear calendario de conferencias / presencia externa 2026 (input Martijn: visibilidad para exit value)", project:"30-ERM/Marca-Personal", owner:"Eric", due:"This week (Fri 18 Apr)", dueSort:2, captured:"16 Apr 2026" },
 { priority:"High", task:"Revisar datos del trial de Cryptosporidium en terneros", project:"Poster Anembe 2026", owner:"Eric", due:"This week (Fri 18 Apr)", dueSort:2, captured:"16 Apr 2026" },
-{ priority:"High", task:"Confirmar fecha limite de envio de posters a Anembe", project:"Poster Anembe 2026", owner:"Eric", due:"ASAP", dueSort:2, captured:"16 Apr 2026" },
 { priority:"High", task:"Actualizar traduccion PhytoHoof leaflet: eliminar claim biodigester compatible (pedido por Mattheus 15/04)", project:"Showpad Implementation", owner:"Eric", due:"ASAP", dueSort:2, captured:"16 Apr 2026" },
 { priority:"High", task:"Subir versiones alemanas de DigeMax a Showpad (pedido por Wilfried 16/04)", project:"Showpad Implementation", owner:"Eric", due:"This week (Fri 18 Apr)", dueSort:2, captured:"16 Apr 2026" },
-{ priority:"High", task:"Conseguir informe de laboratorio real del in vitro test DigeMax para Mattheus — confirmar si eres tu quien debe gestionarlo", project:"Showpad Implementation", owner:"Eric", due:"ASAP", dueSort:2, captured:"16 Apr 2026" },
-{ priority:"High", task:"Acelerar competitive snapshot Southern Africa para Ross usando nuevo framework Pre-Visit Prep", project:"Southern Africa Market", owner:"Eric", due:"ASAP", dueSort:2, captured:"16 Apr 2026" },
 { priority:"High", task:"Construir bloques de onboarding bricks not opinions para Bernd (ICP, funnel, playbook, criterios, mapa relaciones, quick wins)", project:"CD Onboarding Briefing - Bernd Spelbos", owner:"Eric", due:"Next 2 weeks", dueSort:3, captured:"16 Apr 2026" },
-{ priority:"High", task:"Escribir ICP one-pager por PMC priorizado (camaron / broilers / disenterìa ponedoras)", project:"Director Comercial - Proceso Completo", owner:"Eric", due:"Next 2 weeks", dueSort:3, captured:"16 Apr 2026" },
 { priority:"Medium", task:"Seguimiento con Luis sobre Cipor y pipeline", project:"BRM Peru 2026", owner:"Eric", due:"April 2026", dueSort:4, captured:"16 Apr 2026" },
-{ priority:"Medium", task:"Capitalizar validacion COVAP (+10-14% calculado por el cliente) como 1-pager case study para otras cooperativas espanolas", project:"COVAP Results Presentation", owner:"Eric", due:"April sprint", dueSort:4, captured:"16 Apr 2026" },
-{ priority:"Medium", task:"Preparar 1-3 slides sobre efectividad DigestStart-F / DigestPro 2.0 contra coccidiosis en rumiantes — basado en Final Report AHC.docx enviado por Mattheus 15/04. Tono cientifico-factual", project:"Dysentery Program", owner:"Eric", due:"April 2026", dueSort:4, captured:"16 Apr 2026" },
-{ priority:"Medium", task:"Confirmar lista de asistentes AHC al ESPHM", project:"ESPHM 2026 Congress", owner:"Eric", due:"April 2026", dueSort:4, captured:"16 Apr 2026" },
-{ priority:"Medium", task:"Evaluar si AHC presenta poster o comunicacion", project:"ESPHM 2026 Congress", owner:"Eric", due:"April 2026", dueSort:4, captured:"16 Apr 2026" },
-{ priority:"Medium", task:"Terminar la presentacion corporativa de AHC", project:"Other", owner:"Eric", due:"April 2026", dueSort:4, captured:"16 Apr 2026" },
 { priority:"Medium", task:"Eric: disenar poster 80x120 — muy visual, prueba de campo, nivel Eric", project:"Poster Anembe 2026", owner:"Eric", due:"April 2026", dueSort:4, captured:"16 Apr 2026" },
 { priority:"Medium", task:"Definir estructura de contenido por producto/mercado", project:"Showpad Implementation", owner:"Eric", due:"April 2026", dueSort:4, captured:"16 Apr 2026" },
-{ priority:"Medium", task:"Revisar si hay mas paginas que necesiten actualizacion", project:"Website AHC", owner:"Eric", due:"April 2026", dueSort:4, captured:"16 Apr 2026" },
-{ priority:"Medium", task:"Coordinar contenido multiidioma con WPML", project:"Website AHC", owner:"Eric", due:"April 2026", dueSort:4, captured:"16 Apr 2026" },
+{ priority:"Medium", task:"Terminar la presentacion corporativa de AHC", project:"Other", owner:"Eric", due:"April 2026", dueSort:4, captured:"16 Apr 2026" },
 { priority:"Low", task:"Eric + Rene: disenar estructura Dysentery Program completo (in vitro + TiHo + Uni Leon)", project:"Dysentery Program", owner:"Eric / Rene", due:"After delivering both presentations", dueSort:5, captured:"16 Apr 2026" },
-{ priority:"Low", task:"Preparar survey para no-asistentes", project:"Global Call - Contexto Completo", owner:"Eric", due:"Post-call", dueSort:5, captured:"16 Apr 2026" },
-{ priority:"Low", task:"Revisar pipeline Espana con Amalia (datos cruzados con PBI disponibles en Teams)", project:"Other", owner:"Eric", due:"After Easter", dueSort:5, captured:"16 Apr 2026" },
 { priority:"Low", task:"Mattheus: revision tecnica del poster y decision de direccion", project:"Poster Anembe 2026", owner:"Mattheus", due:"After fact-finding", dueSort:5, captured:"16 Apr 2026" },
 { priority:"Low", task:"Continuar subida de materiales actualizados", project:"Showpad Implementation", owner:"Eric", due:"Ongoing", dueSort:5, captured:"16 Apr 2026" },
-{ priority:"Low", task:"Armonizar portfolio de presentaciones corporativas (shrimp + DigeMax Ecuador + Nano + Corporate — estilos inconsistentes)", project:"Showpad Implementation", owner:"Eric", due:"After Easter", dueSort:5, captured:"16 Apr 2026" },
+{ priority:"Low", task:"Armonizar portfolio de presentaciones corporativas (shrimp + DigeMax Ecuador + Nano + Corporate)", project:"Showpad Implementation", owner:"Eric", due:"After Easter", dueSort:5, captured:"16 Apr 2026" },
 { priority:"Low", task:"Enviar a Amalia explicacion sobre AHCSL: liquidacion de la empresa y como se va a operar a partir de ahora", project:"AHC Spain SL Setup", owner:"Eric", due:"After Easter", dueSort:5, captured:"16 Apr 2026" },
-{ priority:"Low", task:"Documentar AHC Trial Presentation Standard v1.0 (segmentacion + comparativa temporal + estadistica + pre-mortem local)", project:"Trials Espana 2026", owner:"Eric", due:"After team meeting", dueSort:5, captured:"16 Apr 2026" },
+{ priority:"Low", task:"Revisar pipeline Espana con Amalia (datos cruzados con PBI disponibles en Teams)", project:"Other", owner:"Eric", due:"After Easter", dueSort:5, captured:"16 Apr 2026" },
 { priority:"Low", task:"Preguntar a Martijn criterios para cerrar estructura post-Johan", project:"260407-Session-AHC-Johan-Strategy", owner:"Eric", due:"Next 1:1", dueSort:6, captured:"16 Apr 2026" },
-{ priority:"Low", task:"HOLD: Convocar reunion Equipo Rumiantes (5: Eric + Mateus + Amalia + Encarna + Rene) — 75 min, 4 decisiones a forzar. Primera semana mayo 2026 (pendiente decision sobre Mateus)", project:"BRIEF-Reunion-Equipo-Rumiantes-COVAP", owner:"Eric", due:"~First week May 2026", dueSort:6, captured:"16 Apr 2026" },
+{ priority:"Low", task:"HOLD: Convocar reunion Equipo Rumiantes (5: Eric + Mateus + Amalia + Encarna + Rene) — 75 min, 4 decisiones. Primera semana mayo 2026 (pendiente decision sobre Mateus)", project:"BRIEF-Reunion-Equipo-Rumiantes-COVAP", owner:"Eric", due:"~First week May 2026", dueSort:6, captured:"16 Apr 2026" },
 { priority:"Low", task:"HOLD: 1:1 previo con Mateus (24h antes) — adelantarle los 4 bloques, marco te protejo no te ataco", project:"BRIEF-Reunion-Equipo-Rumiantes-COVAP", owner:"Eric", due:"~First week May 2026", dueSort:6, captured:"16 Apr 2026" },
 { priority:"Low", task:"HOLD: 1:1 previo con Amalia (24h antes) — pedir compromiso explicito de abrir con reconocimiento tecnico de Mateus", project:"BRIEF-Reunion-Equipo-Rumiantes-COVAP", owner:"Eric", due:"~First week May 2026", dueSort:6, captured:"16 Apr 2026" },
-{ priority:"Low", task:"Verificar numeros modelo Polonia con Rene — revenue mantenido post-eliminacion distribuidor? Potencial case study interno de foco", project:"Director Comercial - Proceso Completo", owner:"Eric", due:"—", dueSort:6, captured:"16 Apr 2026" },
-{ priority:"Low", task:"Calendar invite con agenda teaser", project:"Global Call - Contexto Completo", owner:"Eric", due:"~4 May 2026", dueSort:6, captured:"16 Apr 2026" },
-{ priority:"Low", task:"Reminder personal a Andre Schrijver y Henk Jan Kwant", project:"Global Call - Contexto Completo", owner:"Eric", due:"~10 Jun 2026", dueSort:6, captured:"16 Apr 2026" },
-{ priority:"Low", task:"Esperar contacto de Mitra (India) para leaflets mercado indio", project:"Other", owner:"Eric", due:"Pending Mitra", dueSort:6, captured:"16 Apr 2026" },
-{ priority:"Low", task:"Pendiente de Joan Totusaus: compartir presentacion ecografias pulmonares para review AHC", project:"Poster Anembe 2026", owner:"Joan Totusaus", due:"Before Anembe (20-22 May)", dueSort:6, captured:"16 Apr 2026" },
-{ priority:"Low", task:"MT meeting: proponer guidelines para publicaciones externas AHC", project:"Poster Anembe 2026", owner:"Eric", due:"Next MT meeting", dueSort:6, captured:"16 Apr 2026" },
-{ priority:"Low", task:"Eric: Re-priorizar estructura de contenido Showpad segun decisiones de foco de Ruud", project:"Showpad Implementation", owner:"Eric", due:"After Ruud's decision", dueSort:6, captured:"16 Apr 2026" },
 { priority:"Low", task:"Coordinar visita Madrid con Amalia y Encarna para combinar firma notaria + visitas clientes", project:"AHC Spain SL Setup", owner:"Encarna / Amalia", due:"Before notary signing", dueSort:6, captured:"16 Apr 2026" },
+{ priority:"Low", task:"Pendiente de Joan Totusaus: compartir presentacion ecografias pulmonares para review AHC", project:"Poster Anembe 2026", owner:"Joan Totusaus", due:"Before Anembe (20-22 May)", dueSort:6, captured:"16 Apr 2026" },
+{ priority:"Low", task:"Esperar contacto de Mitra (India) para leaflets mercado indio", project:"Other", owner:"Eric", due:"Pending Mitra", dueSort:6, captured:"16 Apr 2026" },
 { priority:"Low", task:"Eric: ayudar con la presentacion cuando llegue el momento", project:"Taiwan Seminar 2026", owner:"Eric", due:"Pending date confirmation", dueSort:6, captured:"16 Apr 2026" },
 ];
 
