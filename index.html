@@ -7,190 +7,541 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif; background: #f5f6f8; color: #333; font-size: 13px; }
-    header { background: #003885; color: white; padding: 18px 32px; display: flex; align-items: center; justify-content: space-between; border-bottom: 3px solid #009900; }
+
+    body {
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f5f6f8;
+      color: #333;
+      font-size: 13px;
+    }
+
+    header {
+      background: #003885;
+      color: white;
+      padding: 18px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 3px solid #009900;
+    }
     .header-left { display: flex; flex-direction: column; gap: 2px; }
-    .header-left h1 { font-size: 20px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
-    .header-tagline { font-size: 11px; color: #009900; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+    .header-left h1 {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .header-tagline {
+      font-size: 11px;
+      color: #009900;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
     .header-right { text-align: right; font-size: 12px; opacity: 0.75; }
-    .meta-bar { background: #e8f0f8; border-bottom: 1px solid #c5d8f0; padding: 8px 32px; font-size: 11px; color: #003885; display: flex; gap: 24px; flex-wrap: wrap; }
-    .stats { padding: 16px 32px; display: flex; gap: 12px; flex-wrap: wrap; }
-    .stat-card { background: white; border: 1px solid #e0e4ea; border-top: 3px solid #003885; border-radius: 6px; padding: 12px 20px; min-width: 100px; text-align: center; }
+    .header-right strong { opacity: 1; display: block; font-size: 13px; }
+
+    .meta-bar {
+      background: #e8f0f8;
+      border-bottom: 1px solid #c5d8f0;
+      padding: 8px 32px;
+      font-size: 11px;
+      color: #003885;
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .stats {
+      padding: 16px 32px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .stat-card {
+      background: white;
+      border: 1px solid #e0e4ea;
+      border-top: 3px solid #003885;
+      border-radius: 6px;
+      padding: 12px 20px;
+      min-width: 100px;
+      text-align: center;
+    }
     .stat-card .num { font-size: 28px; font-weight: 700; line-height: 1; }
     .stat-card .lbl { font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 3px; font-weight: 600; }
-    .num-crit { color: #c0392b; } .num-high { color: #003885; } .num-med { color: #009900; } .num-low { color: #999; } .num-total { color: #003885; }
+    .num-crit  { color: #c0392b; }
+    .num-high  { color: #003885; }
+    .num-med   { color: #009900; }
+    .num-low   { color: #999; }
+    .num-total { color: #003885; }
     .stat-card.total { border-top-color: #009900; }
-    .controls { padding: 12px 32px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; background: white; border-bottom: 1px solid #e0e4ea; border-top: 1px solid #e0e4ea; }
-    .controls label { font-weight: 700; font-size: 10px; color: #003885; text-transform: uppercase; letter-spacing: 0.6px; }
-    select, input[type="text"] { border: 1px solid #c5d8f0; border-radius: 4px; padding: 5px 10px; font-size: 12px; font-family: 'Poppins', sans-serif; color: #333; background: #fafcff; }
+
+    .controls {
+      padding: 12px 32px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      background: white;
+      border-bottom: 1px solid #e0e4ea;
+      border-top: 1px solid #e0e4ea;
+    }
+    .controls label {
+      font-weight: 700;
+      font-size: 10px;
+      color: #003885;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+    select, input[type="text"] {
+      border: 1px solid #c5d8f0;
+      border-radius: 4px;
+      padding: 5px 10px;
+      font-size: 12px;
+      font-family: 'Poppins', sans-serif;
+      color: #333;
+      background: #fafcff;
+    }
     select:focus, input[type="text"]:focus { outline: 2px solid #003885; border-color: transparent; }
-    .btn { padding: 6px 14px; border: none; border-radius: 4px; font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 600; cursor: pointer; }
-    .btn-clear { background: #f0f0f0; color: #555; border: 1px solid #ddd; } .btn-clear:hover { background: #e0e0e0; }
-    .btn-edit { background: #003885; color: white; margin-left: auto; } .btn-edit:hover { background: #002a6a; }
-    .btn-edit.active { background: #c0392b; } .btn-edit.active:hover { background: #a93226; }
-    .btn-copy { background: #009900; color: white; display: none; } .btn-copy:hover { background: #007700; }
-    .edit-hint { display: none; padding: 9px 32px; background: #fffbe6; border-bottom: 1px solid #ffe58f; font-size: 12px; color: #7a5c00; }
+
+    .btn {
+      padding: 6px 14px;
+      border: none;
+      border-radius: 4px;
+      font-size: 12px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-clear   { background: #f0f0f0; color: #555; border: 1px solid #ddd; }
+    .btn-clear:hover { background: #e0e0e0; }
+    .btn-edit    { background: #003885; color: white; margin-left: auto; }
+    .btn-edit:hover { background: #002a6a; }
+    .btn-edit.active { background: #c0392b; }
+    .btn-edit.active:hover { background: #a93226; }
+    .btn-copy    { background: #009900; color: white; display: none; }
+    .btn-copy:hover { background: #007700; }
+
+    .edit-hint {
+      display: none;
+      padding: 9px 32px;
+      background: #fffbe6;
+      border-bottom: 1px solid #ffe58f;
+      font-size: 12px;
+      color: #7a5c00;
+    }
     .edit-hint.visible { display: block; }
+
     #count-bar { padding: 8px 32px; font-size: 11px; color: #777; }
     #count-bar span { font-weight: 700; color: #003885; }
+
     .table-wrap { padding: 0 32px 48px; overflow-x: auto; }
-    table { width: 100%; border-collapse: collapse; background: white; border-radius: 6px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,56,133,0.08); }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,56,133,0.08);
+    }
     thead tr { background: #003885; }
-    th { text-align: left; padding: 10px 14px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px; color: rgba(255,255,255,0.85); white-space: nowrap; cursor: pointer; user-select: none; }
+    th {
+      text-align: left;
+      padding: 10px 14px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      color: rgba(255,255,255,0.85);
+      white-space: nowrap;
+      cursor: pointer;
+      user-select: none;
+    }
     th:hover { color: white; }
-    th.sorted-asc::after { content: " ↑"; color: #009900; } th.sorted-desc::after { content: " ↓"; color: #009900; }
+    th.sorted-asc::after  { content: " \2191"; color: #009900; }
+    th.sorted-desc::after { content: " \2193"; color: #009900; }
+
     tbody tr { border-bottom: 1px solid #f0f3f8; transition: background 0.1s; }
-    tbody tr:hover { background: #f0f5ff; } tbody tr.hidden { display: none; }
-    td { padding: 10px 14px; vertical-align: top; line-height: 1.4; } .task-text { max-width: 380px; }
-    .badge { display: inline-block; padding: 2px 9px; border-radius: 20px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
+    tbody tr:hover { background: #f0f5ff; }
+    tbody tr.hidden { display: none; }
+    td { padding: 10px 14px; vertical-align: top; line-height: 1.4; }
+    .task-text { max-width: 380px; }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 9px;
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
     .p-critical { background: #fde8e8; color: #c0392b; border: 1px solid #f5c6c6; }
-    .p-high { background: #e8eef8; color: #003885; border: 1px solid #c5d8f0; }
-    .p-medium { background: #e8f5e8; color: #007700; border: 1px solid #b8e0b8; }
-    .p-low { background: #f5f5f5; color: #888; border: 1px solid #ddd; }
-    .owner-chip { display: inline-block; padding: 2px 9px; border-radius: 12px; font-size: 11px; font-weight: 600; background: #e8eef8; color: #003885; border: 1px solid #c5d8f0; white-space: nowrap; }
+    .p-high     { background: #e8eef8; color: #003885; border: 1px solid #c5d8f0; }
+    .p-medium   { background: #e8f5e8; color: #007700; border: 1px solid #b8e0b8; }
+    .p-low      { background: #f5f5f5; color: #888;    border: 1px solid #ddd; }
+
+    .owner-chip {
+      display: inline-block;
+      padding: 2px 9px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      background: #e8eef8;
+      color: #003885;
+      border: 1px solid #c5d8f0;
+      white-space: nowrap;
+    }
     .owner-chip.ext { background: #f0f8f0; color: #007700; border-color: #b8e0b8; }
-    .proj-tag { font-size: 11px; color: #555; background: #f0f3f8; padding: 2px 7px; border-radius: 4px; white-space: nowrap; }
-    .due-overdue { color: #c0392b; font-weight: 700; } .due-today { color: #003885; font-weight: 700; } .due-week { color: #009900; font-weight: 600; } .due-later { color: #888; }
-    .cb-col { width: 36px; text-align: center; } th.cb-col, td.cb-col { display: none; }
-    body.edit-mode th.cb-col, body.edit-mode td.cb-col { display: table-cell; }
+
+    .proj-tag {
+      font-size: 11px;
+      color: #555;
+      background: #f0f3f8;
+      padding: 2px 7px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    .task-notes {
+      font-size: 11px;
+      color: #888;
+      margin-top: 4px;
+      font-style: italic;
+      line-height: 1.3;
+    }
+
+    .due-overdue { color: #c0392b; font-weight: 700; }
+    .due-today   { color: #003885; font-weight: 700; }
+    .due-week    { color: #009900; font-weight: 600; }
+    .due-later   { color: #888; }
+
+    .cb-col { width: 36px; text-align: center; }
+    th.cb-col, td.cb-col { display: none; }
+    body.edit-mode th.cb-col,
+    body.edit-mode td.cb-col { display: table-cell; }
     body.edit-mode tbody tr:not(.hidden) { cursor: pointer; }
     body.edit-mode tbody tr:not(.hidden):hover { background: #e8f0ff; }
-    tr.done-row td { opacity: 0.4; text-decoration: line-through; } tr.done-row td.cb-col { opacity: 1; text-decoration: none; }
+    tr.done-row td { opacity: 0.4; text-decoration: line-through; }
+    tr.done-row td.cb-col { opacity: 1; text-decoration: none; }
     input[type="checkbox"].task-cb { width: 16px; height: 16px; cursor: pointer; accent-color: #009900; }
-    #toast { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%); background: #003885; color: white; padding: 10px 22px; border-radius: 6px; font-size: 13px; font-weight: 600; border-left: 4px solid #009900; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 999; }
+
+    #toast {
+      position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
+      background: #003885; color: white; padding: 10px 22px;
+      border-radius: 6px; font-size: 13px; font-weight: 600; border-left: 4px solid #009900;
+      opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 999;
+    }
     #toast.show { opacity: 1; }
-    .legend { padding: 14px 32px; display: flex; gap: 16px; flex-wrap: wrap; font-size: 11px; color: #888; border-top: 1px solid #e0e4ea; background: white; margin-top: 8px; }
+
+    .legend {
+      padding: 14px 32px;
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 11px;
+      color: #888;
+      border-top: 1px solid #e0e4ea;
+      background: white;
+      margin-top: 8px;
+    }
     .legend-item { display: flex; align-items: center; gap: 6px; }
     .legend strong { color: #003885; margin-right: 4px; }
   </style>
 </head>
 <body>
+
 <header>
   <div class="header-left">
     <h1>AHC Task Dashboard</h1>
     <span class="header-tagline">Solutions in Livestock Nutrition</span>
   </div>
-  <div class="header-right">Updated: 16 April 2026</div>
+  <div class="header-right">
+    Updated: 23 April 2026
+  </div>
 </header>
+
 <div class="meta-bar">
   <div><strong>Purpose:</strong> Full task visibility for the AHC team — input and ideas welcome</div>
-  <div><strong>Note:</strong> Capture date shown is approximate.</div>
+  <div><strong>Note:</strong> Individual task creation dates are not tracked per task. Shown as approximate capture date.</div>
 </div>
+
 <div class="stats">
   <div class="stat-card"><div class="num num-crit" id="s-critical">—</div><div class="lbl">Critical</div></div>
   <div class="stat-card"><div class="num num-high" id="s-high">—</div><div class="lbl">High</div></div>
-  <div class="stat-card"><div class="num num-med" id="s-medium">—</div><div class="lbl">Medium</div></div>
-  <div class="stat-card"><div class="num num-low" id="s-low">—</div><div class="lbl">Low / Waiting</div></div>
+  <div class="stat-card"><div class="num num-med"  id="s-medium">—</div><div class="lbl">Medium</div></div>
+  <div class="stat-card"><div class="num num-low"  id="s-low">—</div><div class="lbl">Low / Waiting</div></div>
   <div class="stat-card total"><div class="num num-total" id="s-total">—</div><div class="lbl">Total Open</div></div>
 </div>
+
 <div class="controls">
   <label>Priority</label>
-  <select id="f-priority"><option value="">All</option><option value="Critical">Critical</option><option value="High">High</option><option value="Medium">Medium</option><option value="Low">Low / Waiting</option></select>
-  <label>Project</label><select id="f-project"><option value="">All</option></select>
-  <label>Owner</label><select id="f-owner"><option value="">All</option></select>
-  <label>Search</label><input type="text" id="f-search" placeholder="Search tasks..." style="width:190px"/>
+  <select id="f-priority">
+    <option value="">All</option>
+    <option value="Critical">Critical</option>
+    <option value="High">High</option>
+    <option value="Medium">Medium</option>
+    <option value="Low">Low / Waiting</option>
+  </select>
+  <label>Project</label>
+  <select id="f-project"><option value="">All</option></select>
+  <label>Owner</label>
+  <select id="f-owner"><option value="">All</option></select>
+  <label>Search</label>
+  <input type="text" id="f-search" placeholder="Search tasks..." style="width:190px"/>
   <button class="btn btn-clear" onclick="clearFilters()">Clear filters</button>
   <button class="btn btn-edit" id="btn-edit" onclick="toggleEditMode()">Edit mode</button>
   <button class="btn btn-copy" id="btn-copy" onclick="copyCompletedList()">Copy list for Claude</button>
 </div>
-<div class="edit-hint" id="edit-hint">Edit mode active — Click tasks to mark as done. When finished, press "Copy list for Claude" and paste in the chat.</div>
+
+<div class="edit-hint" id="edit-hint">
+  <strong>Edit mode active</strong> — Click tasks to mark as done. When finished, press <strong>"Copy list for Claude"</strong> and paste in the chat.
+</div>
+
 <div id="count-bar">Showing <span id="visible-count">—</span> tasks</div>
+
 <div class="table-wrap">
   <table id="task-table">
-    <thead><tr>
-      <th class="cb-col"></th>
-      <th onclick="sortTable(0)">Priority</th>
-      <th onclick="sortTable(1)">Task</th>
-      <th onclick="sortTable(2)">Project</th>
-      <th onclick="sortTable(3)">Owner</th>
-      <th onclick="sortTable(4)">Due Date</th>
-      <th onclick="sortTable(5)">Captured</th>
-    </tr></thead>
+    <thead>
+      <tr>
+        <th class="cb-col"></th>
+        <th onclick="sortTable(0)">Priority</th>
+        <th onclick="sortTable(1)">Task</th>
+        <th onclick="sortTable(2)">Project</th>
+        <th onclick="sortTable(3)">Owner</th>
+        <th onclick="sortTable(4)">Due Date</th>
+        <th onclick="sortTable(5)">Captured</th>
+      </tr>
+    </thead>
     <tbody id="task-body"></tbody>
   </table>
 </div>
+
 <div class="legend">
   <strong>Priority:</strong>
   <div class="legend-item"><span class="badge p-critical">Critical</span> Overdue or due today</div>
-  <div class="legend-item"><span class="badge p-high">High</span> Due this week / ASAP</div>
-  <div class="legend-item"><span class="badge p-medium">Medium</span> Due in April</div>
+  <div class="legend-item"><span class="badge p-high">High</span> Due this week</div>
+  <div class="legend-item"><span class="badge p-medium">Medium</span> Due this month</div>
   <div class="legend-item"><span class="badge p-low">Low / Waiting</span> Later or blocked on others</div>
 </div>
+
 <div id="toast">List copied to clipboard</div>
+
 <script>
 const tasks = [
-{ priority:"High", task:"CRITICO — Preparar CD Onboarding Briefing para Bernd Spelbos — documento por area (species x market): situacion actual / wins / blockers / quick wins / relaciones clave / tareas priorizadas", project:"CD Onboarding Briefing - Bernd Spelbos", owner:"Eric", due:"Before 1 Jun (draft overdue)", dueSort:2, captured:"16 Apr 2026" },
-{ priority:"High", task:"Disenar framework Pre-Visit Prep + Competitor Snapshot (base reutilizable para equipo comercial)", project:"Director Comercial - Proceso Completo", owner:"Eric", due:"This week (Fri 18 Apr)", dueSort:2, captured:"16 Apr 2026" },
-{ priority:"High", task:"Documentar 4-stage funnel acordado e integrarlo al sales playbook AHC", project:"Director Comercial - Proceso Completo", owner:"Eric", due:"This week (Fri 18 Apr)", dueSort:2, captured:"16 Apr 2026" },
-{ priority:"High", task:"Definir plantilla de weekly report para equipo comercial (disciplina no-negociable acordada en MT)", project:"Director Comercial - Proceso Completo", owner:"Eric", due:"This week (Fri 18 Apr)", dueSort:2, captured:"16 Apr 2026" },
-{ priority:"High", task:"Mapear calendario de conferencias / presencia externa 2026 (input Martijn: visibilidad para exit value)", project:"30-ERM/Marca-Personal", owner:"Eric", due:"This week (Fri 18 Apr)", dueSort:2, captured:"16 Apr 2026" },
-{ priority:"High", task:"Revisar datos del trial de Cryptosporidium en terneros", project:"Poster Anembe 2026", owner:"Eric", due:"This week (Fri 18 Apr)", dueSort:2, captured:"16 Apr 2026" },
-{ priority:"High", task:"Actualizar traduccion PhytoHoof leaflet: eliminar claim biodigester compatible (pedido por Mattheus 15/04)", project:"Showpad Implementation", owner:"Eric", due:"ASAP", dueSort:2, captured:"16 Apr 2026" },
-{ priority:"High", task:"Subir versiones alemanas de DigeMax a Showpad (pedido por Wilfried 16/04)", project:"Showpad Implementation", owner:"Eric", due:"This week (Fri 18 Apr)", dueSort:2, captured:"16 Apr 2026" },
-{ priority:"High", task:"Construir bloques de onboarding bricks not opinions para Bernd (ICP, funnel, playbook, criterios, mapa relaciones, quick wins)", project:"CD Onboarding Briefing - Bernd Spelbos", owner:"Eric", due:"Next 2 weeks", dueSort:3, captured:"16 Apr 2026" },
-{ priority:"Medium", task:"Seguimiento con Luis sobre Cipor y pipeline", project:"BRM Peru 2026", owner:"Eric", due:"April 2026", dueSort:4, captured:"16 Apr 2026" },
-{ priority:"Medium", task:"Eric: disenar poster 80x120 — muy visual, prueba de campo, nivel Eric", project:"Poster Anembe 2026", owner:"Eric", due:"April 2026", dueSort:4, captured:"16 Apr 2026" },
-{ priority:"Medium", task:"Definir estructura de contenido por producto/mercado", project:"Showpad Implementation", owner:"Eric", due:"April 2026", dueSort:4, captured:"16 Apr 2026" },
-{ priority:"Medium", task:"Terminar la presentacion corporativa de AHC", project:"Other", owner:"Eric", due:"April 2026", dueSort:4, captured:"16 Apr 2026" },
-{ priority:"Low", task:"Eric + Rene: disenar estructura Dysentery Program completo (in vitro + TiHo + Uni Leon)", project:"Dysentery Program", owner:"Eric / Rene", due:"After delivering both presentations", dueSort:5, captured:"16 Apr 2026" },
-{ priority:"Low", task:"Mattheus: revision tecnica del poster y decision de direccion", project:"Poster Anembe 2026", owner:"Mattheus", due:"After fact-finding", dueSort:5, captured:"16 Apr 2026" },
-{ priority:"Low", task:"Continuar subida de materiales actualizados", project:"Showpad Implementation", owner:"Eric", due:"Ongoing", dueSort:5, captured:"16 Apr 2026" },
-{ priority:"Low", task:"Armonizar portfolio de presentaciones corporativas (shrimp + DigeMax Ecuador + Nano + Corporate)", project:"Showpad Implementation", owner:"Eric", due:"After Easter", dueSort:5, captured:"16 Apr 2026" },
-{ priority:"Low", task:"Enviar a Amalia explicacion sobre AHCSL: liquidacion de la empresa y como se va a operar a partir de ahora", project:"AHC Spain SL Setup", owner:"Eric", due:"After Easter", dueSort:5, captured:"16 Apr 2026" },
-{ priority:"Low", task:"Revisar pipeline Espana con Amalia (datos cruzados con PBI disponibles en Teams)", project:"Other", owner:"Eric", due:"After Easter", dueSort:5, captured:"16 Apr 2026" },
-{ priority:"Low", task:"Preguntar a Martijn criterios para cerrar estructura post-Johan", project:"260407-Session-AHC-Johan-Strategy", owner:"Eric", due:"Next 1:1", dueSort:6, captured:"16 Apr 2026" },
-{ priority:"Low", task:"HOLD: Convocar reunion Equipo Rumiantes (5: Eric + Mateus + Amalia + Encarna + Rene) — 75 min, 4 decisiones. Primera semana mayo 2026 (pendiente decision sobre Mateus)", project:"BRIEF-Reunion-Equipo-Rumiantes-COVAP", owner:"Eric", due:"~First week May 2026", dueSort:6, captured:"16 Apr 2026" },
-{ priority:"Low", task:"HOLD: 1:1 previo con Mateus (24h antes) — adelantarle los 4 bloques, marco te protejo no te ataco", project:"BRIEF-Reunion-Equipo-Rumiantes-COVAP", owner:"Eric", due:"~First week May 2026", dueSort:6, captured:"16 Apr 2026" },
-{ priority:"Low", task:"HOLD: 1:1 previo con Amalia (24h antes) — pedir compromiso explicito de abrir con reconocimiento tecnico de Mateus", project:"BRIEF-Reunion-Equipo-Rumiantes-COVAP", owner:"Eric", due:"~First week May 2026", dueSort:6, captured:"16 Apr 2026" },
-{ priority:"Low", task:"Coordinar visita Madrid con Amalia y Encarna para combinar firma notaria + visitas clientes", project:"AHC Spain SL Setup", owner:"Encarna / Amalia", due:"Before notary signing", dueSort:6, captured:"16 Apr 2026" },
-{ priority:"Low", task:"Pendiente de Joan Totusaus: compartir presentacion ecografias pulmonares para review AHC", project:"Poster Anembe 2026", owner:"Joan Totusaus", due:"Before Anembe (20-22 May)", dueSort:6, captured:"16 Apr 2026" },
-{ priority:"Low", task:"Esperar contacto de Mitra (India) para leaflets mercado indio", project:"Other", owner:"Eric", due:"Pending Mitra", dueSort:6, captured:"16 Apr 2026" },
-{ priority:"Low", task:"Eric: ayudar con la presentacion cuando llegue el momento", project:"Taiwan Seminar 2026", owner:"Eric", due:"Pending date confirmation", dueSort:6, captured:"16 Apr 2026" },
+  { priority:"High", task:"Responder a Luis López sobre estructura del díptico acuicultura Perú", project:"BRM Peru 2026", owner:"Eric", due:"ASAP", dueSort:2, captured:"23 Apr 2026", notes:"" },
+  { priority:"High", task:"Publicar presentaciones Brachyspira en Showpad Germany — confirmar versiones revisadas con Encarna + subir 2 archivos DE al espacio Germany", project:"Showpad Implementation", owner:"Eric", due:"ASAP", dueSort:2, captured:"23 Apr 2026", notes:"" },
+  { priority:"High", task:"Desbloquear web AHC para Max: enviar textos banner cookies (banner + pestañas config) + recargar 52.662 créditos WPML", project:"Website AHC", owner:"Eric", due:"ASAP", dueSort:2, captured:"23 Apr 2026", notes:"" },
+  { priority:"High", task:"Responder a Max Camunas: confirmar si pestaña 'especies' tiene contenido propio o es solo contenedor de 4 subpáginas", project:"Website AHC", owner:"Eric", due:"ASAP", dueSort:2, captured:"23 Apr 2026", notes:"" },
+  { priority:"High", task:"🟠 Mapear calendario de conferencias / presencia externa 2026 (input Martijn: visibilidad para exit value)", project:"30-ERM/Marca-Personal", owner:"Eric", due:"This week", dueSort:3, captured:"23 Apr 2026", notes:"" },
+  { priority:"High", task:"Enviar a Amalia explicación sobre AHCSL: liquidación de la empresa y cómo se va a operar a partir de ahora", project:"AHC Spain SL Setup", owner:"Eric", due:"This week", dueSort:3, captured:"23 Apr 2026", notes:"" },
+  { priority:"High", task:"🔴 Reunión MT — input session para validar Excel (90 min)", project:"CD Onboarding Briefing - Bernd Spelbos", owner:"Eric", due:"30 Apr 2026, 11:00", dueSort:3, captured:"23 Apr 2026", notes:"" },
+  { priority:"High", task:"🟠 Documentar 4-stage funnel acordado e integrarlo al sales playbook AHC", project:"Director Comercial - Proceso Completo", owner:"Eric", due:"This week", dueSort:3, captured:"23 Apr 2026", notes:"" },
+  { priority:"High", task:"🟠 Definir plantilla de weekly report para equipo comercial (disciplina no-negociable acordada en MT)", project:"Director Comercial - Proceso Completo", owner:"Eric", due:"This week", dueSort:3, captured:"23 Apr 2026", notes:"" },
+  { priority:"High", task:"Hacer seguimiento a Amalia/Encarna: firmar y enviar documento comisiones 2026 Encarna (Amalia confirmó envío esta semana)", project:"Director Comercial - Proceso Completo", owner:"Encarna / Amalia", due:"This week", dueSort:3, captured:"23 Apr 2026", notes:"" },
+  { priority:"High", task:"Revisar pipeline España con Amalia (datos cruzados con PBI disponibles en Teams)", project:"Other", owner:"Eric", due:"This week", dueSort:3, captured:"23 Apr 2026", notes:"" },
+  { priority:"High", task:"Revisar datos del trial de Cryptosporidium en terneros", project:"Poster Anembe 2026", owner:"Eric", due:"This week", dueSort:3, captured:"23 Apr 2026", notes:"" },
+  { priority:"High", task:"Armonizar portfolio de presentaciones corporativas (shrimp + DigeMax Ecuador + Nano + Corporate — estilos inconsistentes). Esperar email de Martijn con materiales reenviados de Carlos", project:"Showpad Implementation", owner:"Eric", due:"This week", dueSort:3, captured:"23 Apr 2026", notes:"" },
+  { priority:"High", task:"Informar a Amalia informalmente sobre visita a Barcelona Seafood Show (ella sabe pero no está involucrada)", project:"Showpad Implementation", owner:"Eric", due:"This week", dueSort:3, captured:"23 Apr 2026", notes:"" },
+  { priority:"High", task:"Dar formato AHC al documento DigeMax Aqua Dosing Recommendations y subir a Showpad", project:"Showpad Implementation", owner:"Eric", due:"This week", dueSort:3, captured:"23 Apr 2026", notes:"" },
+  { priority:"High", task:"Preparar borrador presentación coccidiosis (DG Pro, formato visual/infográfico, 1-2 slides, tono no-comercial, datos trial + resultados) para visitas vet practices NL", project:"Showpad Implementation", owner:"Eric", due:"This week", dueSort:3, captured:"23 Apr 2026", notes:"" },
+  { priority:"High", task:"⚠️ COMPROMISO: Coordinar sesión planificación Sow Project (DigeMax en cerdas con Biofractal) con Encarna/Amalia — post llamada Uni León 28 abril", project:"Trials Espana 2026", owner:"Encarna / Amalia", due:"29 Apr 2026", dueSort:3, captured:"23 Apr 2026", notes:"" },
+  { priority:"High", task:"🔴 Revisar y lanzar website AHC — plazo MT meeting: semana del 21/04", project:"Website AHC", owner:"Eric", due:"This week", dueSort:3, captured:"23 Apr 2026", notes:"" },
+  { priority:"High", task:"Confirmar que Ruud hace revisión de claims antes del lanzamiento del website", project:"Website AHC", owner:"Eric", due:"This week", dueSort:3, captured:"23 Apr 2026", notes:"" },
+  { priority:"Medium", task:"Seguimiento con Luis sobre Cipor y pipeline", project:"BRM Peru 2026", owner:"Eric", due:"April 2026", dueSort:4, captured:"23 Apr 2026", notes:"" },
+  { priority:"Medium", task:"🟠 Post-reunión 30A: consolidar inputs del MT en el Excel como versión validada", project:"CD Onboarding Briefing - Bernd Spelbos", owner:"Eric", due:"Fri 1 May 2026", dueSort:4, captured:"23 Apr 2026", notes:"" },
+  { priority:"Medium", task:"🔴 Construir bloques de onboarding 'bricks not opinions' para Bernd (ICP, funnel, playbook, criterios, mapa relaciones, quick wins)", project:"CD Onboarding Briefing - Bernd Spelbos", owner:"Eric", due:"Next 2 weeks", dueSort:4, captured:"23 Apr 2026", notes:"" },
+  { priority:"Medium", task:"Terminar la presentación corporativa de AHC", project:"Other", owner:"Eric", due:"April 2026", dueSort:4, captured:"23 Apr 2026", notes:"" },
+  { priority:"Medium", task:"Eric: diseñar póster 80x120 — muy visual, prueba de campo, 'nivel Eric'", project:"Poster Anembe 2026", owner:"Eric", due:"April 2026", dueSort:4, captured:"23 Apr 2026", notes:"" },
+  { priority:"Medium", task:"Definir estructura de contenido por producto/mercado", project:"Showpad Implementation", owner:"Eric", due:"April 2026", dueSort:4, captured:"23 Apr 2026", notes:"" },
+  { priority:"Low", task:"Eric + René: diseñar estructura Dysentery Program completo (in vitro + TiHo + Uni León)", project:"Dysentery Program", owner:"Eric / René", due:"After delivering both presentations", dueSort:5, captured:"23 Apr 2026", notes:"" },
+  { priority:"Low", task:"Mattheus: revisión técnica del póster y decisión de dirección", project:"Poster Anembe 2026", owner:"Mattheus", due:"After fact-finding", dueSort:5, captured:"23 Apr 2026", notes:"" },
+  { priority:"Low", task:"Continuar subida de materiales actualizados", project:"Showpad Implementation", owner:"Eric", due:"Ongoing", dueSort:5, captured:"23 Apr 2026", notes:"" },
+  { priority:"Low", task:"🟡 Preguntar a Martijn criterios para cerrar estructura post-Johan", project:"260407-Session-AHC-Johan-Strategy", owner:"Eric", due:"Next 1:1", dueSort:6, captured:"23 Apr 2026", notes:"" },
+  { priority:"Low", task:"Coordinar visita Madrid con Amalia y Encarna para combinar firma notaría + visitas clientes", project:"AHC Spain SL Setup", owner:"Encarna / Amalia", due:"Before signing", dueSort:6, captured:"23 Apr 2026", notes:"" },
+  { priority:"Low", task:"⏸️ Convocar reunión Equipo Rumiantes (5: Eric + Mateus + Amalia + Encarna + René) — 75 min, 4 decisiones a forzar", project:"BRIEF-Reunion-Equipo-Rumiantes-COVAP", owner:"Eric", due:"HOLD — early May 2026", dueSort:6, captured:"23 Apr 2026", notes:"Pendiente de decisión sobre Mateus" },
+  { priority:"Low", task:"⏸️ 1:1 previo con Mateus (24h antes de la reunión) — adelantarle los 4 bloques, marco te protejo no te ataco", project:"BRIEF-Reunion-Equipo-Rumiantes-COVAP", owner:"Eric", due:"HOLD — early May 2026", dueSort:6, captured:"23 Apr 2026", notes:"" },
+  { priority:"Low", task:"⏸️ 1:1 previo con Amalia (24h antes) — pedir compromiso explícito de abrir con reconocimiento técnico de Mateus", project:"BRIEF-Reunion-Equipo-Rumiantes-COVAP", owner:"Eric", due:"HOLD — early May 2026", dueSort:6, captured:"23 Apr 2026", notes:"" },
+  { priority:"Low", task:"🔴 CRÍTICO — Preparar CD Onboarding Briefing para Bernd Spelbos — documento por área (species × market): situación actual / wins / blockers / quick wins / relaciones clave / tareas priorizadas", project:"CD Onboarding Briefing - Bernd Spelbos", owner:"Eric", due:"Before 1 Jun 2026", dueSort:6, captured:"23 Apr 2026", notes:"Frame the challenges so well that now it is up to him to perform" },
+  { priority:"Low", task:"Esperar contacto de Mitra (India) para leaflets mercado indio", project:"Other", owner:"Mitra", due:"Pending Mitra", dueSort:6, captured:"23 Apr 2026", notes:"" },
+  { priority:"Low", task:"Pendiente de Joan Totusaus: compartir presentación ecografías pulmonares para review AHC", project:"Poster Anembe 2026", owner:"Joan Totusaus", due:"Pending Joan Totusaus", dueSort:6, captured:"23 Apr 2026", notes:"Antes de Anembe (20-22 mayo)" },
+  { priority:"Low", task:"Eric: ayudar con la presentación cuando llegue el momento", project:"Taiwan Seminar 2026", owner:"Eric", due:"Pending date confirmation", dueSort:6, captured:"23 Apr 2026", notes:"" },
+  { priority:"Low", task:"Pendiente de Mattheus: revisar y condensar texto website por especie (texto enviado 22/04)", project:"Website AHC", owner:"Mattheus", due:"Pending Mattheus", dueSort:6, captured:"23 Apr 2026", notes:"" }
 ];
 
-const projects=[...new Set(tasks.map(t=>t.project))].sort();
-const owners=[...new Set(tasks.map(t=>t.owner))].sort();
-const pfSel=document.getElementById("f-project");
-projects.forEach(p=>{const o=document.createElement("option");o.value=p;o.textContent=p;pfSel.appendChild(o);});
-const owSel=document.getElementById("f-owner");
-owners.forEach(p=>{const o=document.createElement("option");o.value=p;o.textContent=p;owSel.appendChild(o);});
+const projects = [...new Set(tasks.map(t => t.project))].sort();
+const owners   = [...new Set(tasks.map(t => t.owner))].sort();
+const pfSel = document.getElementById("f-project");
+projects.forEach(p => { const o = document.createElement("option"); o.value = p; o.textContent = p; pfSel.appendChild(o); });
+const owSel = document.getElementById("f-owner");
+owners.forEach(p => { const o = document.createElement("option"); o.value = p; o.textContent = p; owSel.appendChild(o); });
 
-function priorityBadge(p){const m={Critical:"p-critical",High:"p-high",Medium:"p-medium",Low:"p-low"};return `<span class="badge ${m[p]||'p-low'}">${p}</span>`;}
-function dueClass(d){if(d.includes("OVERDUE"))return "due-overdue";if(d.includes("Today"))return "due-today";if(d.includes("ASAP")||d.includes("This week")||d.includes("Apr")||d.includes("Next 2"))return "due-week";return "due-later";}
-function ownerChip(o){const ext=!o.includes("Eric");return `<span class="owner-chip ${ext?"ext":""}">${o}</span>`;}
+function priorityBadge(p) {
+  const m = { Critical:"p-critical", High:"p-high", Medium:"p-medium", Low:"p-low" };
+  return `<span class="badge ${m[p]||'p-low'}">${p}</span>`;
+}
+function dueClass(d) {
+  if (d.includes("OVERDUE")) return "due-overdue";
+  if (d.includes("Today"))   return "due-today";
+  if (d.includes("ASAP") || d.includes("Apr") || d.includes("This week") || d.includes("Tomorrow")) return "due-week";
+  return "due-later";
+}
+function ownerChip(o) {
+  const ext = !o.includes("Eric");
+  return `<span class="owner-chip ${ext?"ext":""}">${o}</span>`;
+}
 
-const tbody=document.getElementById("task-body");
-tasks.forEach(t=>{
-  const tr=document.createElement("tr");
-  tr.dataset.priority=t.priority;tr.dataset.project=t.project;tr.dataset.owner=t.owner;
-  tr.dataset.search=(t.task+" "+t.project+" "+t.owner).toLowerCase();tr.dataset.duesort=t.dueSort;
-  tr.innerHTML=`<td class="cb-col"><input type="checkbox" class="task-cb" onclick="event.stopPropagation()" onchange="this.closest('tr').classList.toggle('done-row',this.checked);updateCopyBtn()"></td><td>${priorityBadge(t.priority)}</td><td class="task-text">${t.task}</td><td><span class="proj-tag">${t.project}</span></td><td>${ownerChip(t.owner)}</td><td><span class="${dueClass(t.due)}">${t.due}</span></td><td style="color:#999;font-size:11px">${t.captured}</td>`;
-  tr.addEventListener("click",e=>{if(!document.body.classList.contains("edit-mode"))return;if(e.target.classList.contains("task-cb"))return;const cb=tr.querySelector(".task-cb");cb.checked=!cb.checked;tr.classList.toggle("done-row",cb.checked);updateCopyBtn();});
+const tbody = document.getElementById("task-body");
+tasks.forEach(t => {
+  const tr = document.createElement("tr");
+  tr.dataset.priority = t.priority;
+  tr.dataset.project  = t.project;
+  tr.dataset.owner    = t.owner;
+  tr.dataset.search   = (t.task+" "+t.project+" "+t.owner+" "+(t.notes||"")).toLowerCase();
+  tr.dataset.duesort  = t.dueSort;
+  tr.innerHTML = `
+    <td class="cb-col"><input type="checkbox" class="task-cb"
+      onclick="event.stopPropagation()"
+      onchange="this.closest('tr').classList.toggle('done-row',this.checked);updateCopyBtn()"></td>
+    <td>${priorityBadge(t.priority)}</td>
+    <td class="task-text">${t.task}${t.notes ? `<div class="task-notes">${t.notes}</div>` : ''}</td>
+    <td><span class="proj-tag">${t.project}</span></td>
+    <td>${ownerChip(t.owner)}</td>
+    <td><span class="${dueClass(t.due)}">${t.due}</span></td>
+    <td style="color:#999;font-size:11px">${t.captured}</td>`;
+  tr.addEventListener("click", e => {
+    if (!document.body.classList.contains("edit-mode")) return;
+    if (e.target.classList.contains("task-cb")) return;
+    const cb = tr.querySelector(".task-cb");
+    cb.checked = !cb.checked;
+    tr.classList.toggle("done-row", cb.checked);
+    updateCopyBtn();
+  });
   tbody.appendChild(tr);
 });
 
-function updateStats(){const rows=[...document.querySelectorAll("#task-body tr:not(.hidden)")];document.getElementById("s-critical").textContent=rows.filter(r=>r.dataset.priority==="Critical").length;document.getElementById("s-high").textContent=rows.filter(r=>r.dataset.priority==="High").length;document.getElementById("s-medium").textContent=rows.filter(r=>r.dataset.priority==="Medium").length;document.getElementById("s-low").textContent=rows.filter(r=>r.dataset.priority==="Low").length;document.getElementById("s-total").textContent=rows.length;document.getElementById("visible-count").textContent=rows.length;}
+function updateStats() {
+  const rows = [...document.querySelectorAll("#task-body tr:not(.hidden)")];
+  document.getElementById("s-critical").textContent = rows.filter(r=>r.dataset.priority==="Critical").length;
+  document.getElementById("s-high").textContent     = rows.filter(r=>r.dataset.priority==="High").length;
+  document.getElementById("s-medium").textContent   = rows.filter(r=>r.dataset.priority==="Medium").length;
+  document.getElementById("s-low").textContent      = rows.filter(r=>r.dataset.priority==="Low").length;
+  document.getElementById("s-total").textContent    = rows.length;
+  document.getElementById("visible-count").textContent = rows.length;
+}
 
-function applyFilters(){const fp=document.getElementById("f-priority").value.toLowerCase();const fj=document.getElementById("f-project").value.toLowerCase();const fo=document.getElementById("f-owner").value.toLowerCase();const fs=document.getElementById("f-search").value.toLowerCase();document.querySelectorAll("#task-body tr").forEach(tr=>{const match=(!fp||tr.dataset.priority.toLowerCase()===fp)&&(!fj||tr.dataset.project.toLowerCase()===fj)&&(!fo||tr.dataset.owner.toLowerCase()===fo)&&(!fs||tr.dataset.search.includes(fs));tr.classList.toggle("hidden",!match);});updateStats();updateCopyBtn();}
+function applyFilters() {
+  const fp = document.getElementById("f-priority").value.toLowerCase();
+  const fj = document.getElementById("f-project").value.toLowerCase();
+  const fo = document.getElementById("f-owner").value.toLowerCase();
+  const fs = document.getElementById("f-search").value.toLowerCase();
+  document.querySelectorAll("#task-body tr").forEach(tr => {
+    const match =
+      (!fp || tr.dataset.priority.toLowerCase()===fp) &&
+      (!fj || tr.dataset.project.toLowerCase()===fj) &&
+      (!fo || tr.dataset.owner.toLowerCase()===fo) &&
+      (!fs || tr.dataset.search.includes(fs));
+    tr.classList.toggle("hidden", !match);
+  });
+  updateStats();
+  updateCopyBtn();
+}
 
 ["f-priority","f-project","f-owner"].forEach(id=>document.getElementById(id).addEventListener("change",applyFilters));
 document.getElementById("f-search").addEventListener("input",applyFilters);
-function clearFilters(){["f-priority","f-project","f-owner"].forEach(id=>document.getElementById(id).value="");document.getElementById("f-search").value="";applyFilters();}
+function clearFilters(){
+  ["f-priority","f-project","f-owner"].forEach(id=>document.getElementById(id).value="");
+  document.getElementById("f-search").value="";
+  applyFilters();
+}
 
-let sortCol=0,sortAsc=true;
-function sortTable(col){const ths=document.querySelectorAll("th");ths.forEach(th=>th.classList.remove("sorted-asc","sorted-desc"));if(sortCol===col)sortAsc=!sortAsc;else{sortCol=col;sortAsc=true;}ths[col+1].classList.add(sortAsc?"sorted-asc":"sorted-desc");const rows=[...document.querySelectorAll("#task-body tr")];const pOrder={Critical:0,High:1,Medium:2,Low:3};rows.sort((a,b)=>{let va=col===4?+a.dataset.duesort:a.cells[col+1].textContent.trim();let vb=col===4?+b.dataset.duesort:b.cells[col+1].textContent.trim();if(col===0){va=pOrder[a.dataset.priority]??9;vb=pOrder[b.dataset.priority]??9;}if(typeof va==="number")return sortAsc?va-vb:vb-va;return sortAsc?va.localeCompare(vb):vb.localeCompare(va);});rows.forEach(r=>tbody.appendChild(r));}
+let sortCol=0, sortAsc=true;
+function sortTable(col){
+  const ths=document.querySelectorAll("th");
+  ths.forEach(th=>th.classList.remove("sorted-asc","sorted-desc"));
+  if(sortCol===col) sortAsc=!sortAsc; else{sortCol=col;sortAsc=true;}
+  ths[col+1].classList.add(sortAsc?"sorted-asc":"sorted-desc");
+  const rows=[...document.querySelectorAll("#task-body tr")];
+  const pOrder={Critical:0,High:1,Medium:2,Low:3};
+  rows.sort((a,b)=>{
+    let va = col===4 ? +a.dataset.duesort : a.cells[col+1].textContent.trim();
+    let vb = col===4 ? +b.dataset.duesort : b.cells[col+1].textContent.trim();
+    if(col===0){va=pOrder[a.dataset.priority]??9;vb=pOrder[b.dataset.priority]??9;}
+    if(typeof va==="number") return sortAsc?va-vb:vb-va;
+    return sortAsc?va.localeCompare(vb):vb.localeCompare(va);
+  });
+  rows.forEach(r=>tbody.appendChild(r));
+}
 
 let editMode=false;
-function toggleEditMode(){if(!editMode){const pwd=prompt("Enter password to enable Edit Mode:");if(pwd!=="AHC TASK DASHBOARD"){showToastMsg("Incorrect password");return;}}editMode=!editMode;document.body.classList.toggle("edit-mode",editMode);const btn=document.getElementById("btn-edit");const hint=document.getElementById("edit-hint");btn.textContent=editMode?"Exit edit mode":"Edit mode";btn.classList.toggle("active",editMode);hint.classList.toggle("visible",editMode);if(!editMode){document.querySelectorAll(".task-cb").forEach(cb=>{cb.checked=false;});document.querySelectorAll("tr.done-row").forEach(tr=>tr.classList.remove("done-row"));}updateCopyBtn();}
+function toggleEditMode(){
+  if(!editMode){
+    const pwd = prompt("Enter password to enable Edit Mode:");
+    if(pwd !== "AHC TASK DASHBOARD"){
+      showToastMsg("Incorrect password");
+      return;
+    }
+  }
+  editMode=!editMode;
+  document.body.classList.toggle("edit-mode",editMode);
+  const btn=document.getElementById("btn-edit");
+  const hint=document.getElementById("edit-hint");
+  btn.textContent = editMode?"Exit edit mode":"Edit mode";
+  btn.classList.toggle("active",editMode);
+  hint.classList.toggle("visible",editMode);
+  if(!editMode){
+    document.querySelectorAll(".task-cb").forEach(cb=>{cb.checked=false;});
+    document.querySelectorAll("tr.done-row").forEach(tr=>tr.classList.remove("done-row"));
+  }
+  updateCopyBtn();
+}
 
-function updateCopyBtn(){const n=document.querySelectorAll(".task-cb:checked").length;const btn=document.getElementById("btn-copy");if(editMode&&n>0){btn.style.display="inline-block";btn.textContent=`Copy list for Claude (${n} task${n!==1?"s":""})`;}else{btn.style.display="none";}}
+function updateCopyBtn(){
+  const n=document.querySelectorAll(".task-cb:checked").length;
+  const btn=document.getElementById("btn-copy");
+  if(editMode && n>0){
+    btn.style.display="inline-block";
+    btn.textContent=`Copy list for Claude (${n} task${n!==1?"s":""})`;
+  } else {
+    btn.style.display="none";
+  }
+}
 
-function copyCompletedList(){const rows=document.querySelectorAll("tr.done-row");if(!rows.length)return;const byProject={};rows.forEach(tr=>{const proj=tr.dataset.project;const task=tr.cells[2].textContent.trim();if(!byProject[proj])byProject[proj]=[];byProject[proj].push(task);});let lines=["TAREAS COMPLETADAS — AHC Dashboard\n"];Object.entries(byProject).sort().forEach(([proj,tasks])=>{lines.push(`[${proj}]`);tasks.forEach(t=>lines.push(`  - ${t}`));lines.push("");});lines.push(`Total: ${rows.length} tarea${rows.length!==1?"s":""}`);const text=lines.join("\n");navigator.clipboard.writeText(text).then(()=>showToast()).catch(()=>prompt("Copy and paste in Claude:",text));}
+function copyCompletedList(){
+  const rows=document.querySelectorAll("tr.done-row");
+  if(!rows.length) return;
+  const byProject={};
+  rows.forEach(tr=>{
+    const proj=tr.dataset.project;
+    const taskCell=tr.cells[2];
+    const notesEl=taskCell.querySelector(".task-notes");
+    const task=(notesEl ? taskCell.firstChild.textContent : taskCell.textContent).trim();
+    if(!byProject[proj]) byProject[proj]=[];
+    byProject[proj].push(task);
+  });
+  let lines=["TAREAS COMPLETADAS — AHC Dashboard\n"];
+  Object.entries(byProject).sort().forEach(([proj,tasks])=>{
+    lines.push(`[${proj}]`);
+    tasks.forEach(t=>lines.push(`  - ${t}`));
+    lines.push("");
+  });
+  lines.push(`Total: ${rows.length} tarea${rows.length!==1?"s":""}`);
+  const text=lines.join("\n");
+  navigator.clipboard.writeText(text).then(()=>showToast()).catch(()=>prompt("Copy and paste in Claude:",text));
+}
 
-function showToastMsg(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2500);}
-function showToast(){showToastMsg("List copied to clipboard");}
+function showToastMsg(msg){
+  const t=document.getElementById("toast");
+  t.textContent=msg;
+  t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"),2500);
+}
+function showToast(){ showToastMsg("List copied to clipboard"); }
 
-sortTable(0);updateStats();
+sortTable(0);
+updateStats();
 </script>
 </body>
 </html>
